@@ -1,7 +1,7 @@
 package hello.core;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixdiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
@@ -13,6 +13,8 @@ import hello.core.order.OrderServiceImpl;
 // 객체의 생성과 연결을 담당함
 // ==> 객체를 생성하고 연결하는 역할과 실행하는 역할(impl)이 명확히 분리된다.
 // 의존관계 주입
+
+// 구성영역
 public class AppConfig {
     
     // 역할과 구현을 분리함
@@ -32,8 +34,10 @@ public class AppConfig {
         return new MemoryMemberRepository();
     }
 
+    // 구성영역의 코드만 수정하면 클라이언트 코드인 OrderServiceImpl을 포함한 사용영역의 코드를 변경할 필요없이 할인정책을 변경할 수 있다.
     public DiscountPolicy discountPolicy(){
-        return new FixdiscountPolicy();
+        // return new DiscountPolicy();
+        return new RateDiscountPolicy();
     }
 
 
