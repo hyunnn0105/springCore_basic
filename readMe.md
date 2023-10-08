@@ -128,8 +128,9 @@
 - 어노테이션 기반 설정
 - AnotaionConfigApplicationcontext 클래스를 사용하면서 자바코드 설정정보를 넘긴다.
 
-
-
+### 스프링 빈 설정 메타 정보 - BeanDefinition
+- BeanDefinition = Bean설정 메타정보
+- 
 
 
  
