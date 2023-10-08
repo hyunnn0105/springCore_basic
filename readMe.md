@@ -116,6 +116,16 @@
 - 자바코드로 스프링빈을 등록하면 생성자를 호출하면서 의존관계 주입도 한번에 처리된다.
 
 
+### BeanFactory와 ApplicationContext
+- BeanFactory는 스프링 컨테이너의 최상위 인터페이스로 스프링 빈을 관리하고 조회하는 역할을 함 
+- ApplicationContext는 BeanFactory 기능을 상속받는다
+- ApplicationContext는 빈 관리기능 + 편리한 부가기능을 제공한다.
+- BeanFactory를 직접 사용할 일은 거의 없다. 부가기능이 포함된 ApplicationContext를 사용한다.
+- BeanFactory나 ApplicationContext를 스프링 컨테이너라고 한다. 
+- 
+
+
+
 
 
  
