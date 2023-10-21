@@ -135,17 +135,86 @@
 ## section5. 싱글톤 컨테이너
 
 ### 웹 어플리케이션과 싱글톤
-- 웹 어플리케이션은 보통 여러 사람이 동시에 요청을 함
-- -> 고객이 요청 할 때마다 객채가 새롭게 생성되면 메모리 낭비가 심하다. 
+- 웹 어플리케이션은 보통 여러 사람이 동시에 요청을 함     
+-> 고객이 요청 할 때마다 객채가 새롭게 생성되면 메모리 낭비가 심하다. 
 (객체 생성시 변수는 스택 메모리 / 인스턴스는 힙메모리에 나누어서 저장됨 https://pathas.tistory.com/123) 
 - 메모리 낭비를 줄이기 위해서 해당 객체가 딱 한기자만 생성되고 공유하고록 설계하면 됨
 ==> 싱글톤 패턴을 적용하면 해결할 수 있음 
 
+### 싱글톤 패턴
+- 클래스의 인스턴스가 딱 한개만 생성하는 것을 보장함    
+-> 그래서 객체 인스턴스를 2개이상 생성하지 못하도록 막아야함   
+-> private 생성자를 사용해서 외부에서 임의로 new 키워드를 사용하지 못하도록 막아야함
+
+* 싱클톤 패턴을 구현하는 다른 방법
+- https://readystory.tistory.com/116
+
+1. Eager Initialization
+싱글톤 클래스의 인스턴스를 클래스 로딩 단계에서 생성함
+
+```java
+    public class Singleton {
+    
+        private static final Singleton instance = new Singleton();
+        
+        // private constructor to avoid client applications to use constructor
+        private Singleton(){}
+     
+        public static Singleton getInstance(){
+            return instance;
+        }
+    }
+```
+
+2. Static Block Initialization
+```java
+public class Singleton {
+ 
+    private static Singleton instance;
+    
+    private Singleton(){}
+    
+    //static block initialization for exception handling
+    static{
+        try{
+            instance = new Singleton();
+        }catch(Exception e){
+            throw new RuntimeException("Exception occured in creating singleton instance");
+        }
+    }
+    
+    public static Singleton getInstance(){
+        return instance;
+    }
+}
+```
+- static block을 통해서 인스턴스 생성시 발생할 수 있는 예외에 대한 처리 가능 
 
 
+3. Lazy Initialization
+```java
+public class Singleton {
+ 
+    private static Singleton instance;
+    
+    private Singleton(){}
+    
+    public static Singleton getInstance(){
+        if(instance == null){
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
 
+```
+- getInstance() 메서드 호출 시 인스턴스가 없다면 생성됨
+-> 사용하지 않을 경우 발생하는 인스턴스 낭비 해결
+- multi-thread 환경에서 동기화 문제 발생
+-> 셍성되지 않은 시점에서 여러 쓰레드가 메서드를 호출한다면 단 하나의 인스턴스를 생성하는 싱글톤 패턴을 위반하는 문제 발생
 
-
-
+4. Thread Safe Singleton
+5. Bill Pugh Singleton Implementaion
+6. Enum Singleton
 
 

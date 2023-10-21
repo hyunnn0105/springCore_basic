@@ -27,4 +27,30 @@ public class SingletonTest {
         // memberService1 != memberService2
         assertThat(memberService1).isNotSameAs(memberService2);
     }
+
+
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체 사용")
+    public void singletonServiceTest(){
+        
+        // 1. priveate로 new 키워드를 막아둠
+        // 'SingletonService()' has private access in 'hello.core.singleton.SingletonService'
+        // new SingletonService();
+
+        // 1. 조회 : 호출할 때마다 같은 객체를 반환
+        SingletonService singletonService1 = SingletonService.getInstance();
+
+        // 2. 조회 : 호출할 때마다 같은 객체를 반환
+        SingletonService singletonService2 = SingletonService.getInstance();
+
+        // 호출 시 같은 객체 인스턴스를 반환함
+        System.out.println("singletonService1 ======== " + singletonService1); // @ab7395e
+        System.out.println("singletonService2 ======== " + singletonService2);  // @ab7395e
+
+        assertThat(singletonService1).isSameAs(singletonService2);
+        
+        singletonService1.logic();
+        // 싱글톤 객체 로직 호출
+
+    }
 }
