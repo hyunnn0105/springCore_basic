@@ -53,6 +53,4 @@ public class AppConfig {
         // return new DiscountPolicy();
         return new RateDiscountPolicy();
     }
-
-
 }
