@@ -1,10 +1,13 @@
 package hello.core.member;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
 
-// memver repository 구현체버전
+// memven repository 구현체버전
+@Component
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();
