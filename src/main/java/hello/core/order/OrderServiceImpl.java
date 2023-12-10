@@ -23,10 +23,37 @@ public class OrderServiceImpl implements OrderService {
     // 생성자 주입
     // OrderServiceImpl 입장에서 생성자를 통해 어떤 객체가 주입될지는 미지수이다.
     // 객체의 의존관계가 주입된다.
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
+    
+    // 필드주입 - 외부에서 변경이 불가능함
+    /*
+    @Autowired private MemberRepository memberRepository;
+    @Autowired private DiscountPolicy discountPolicy;
+    */
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
+
+    // 수정자 주입
+    /*
+    @Autowired
+    public void setDiscountPolicy(MemberRepository memberRepository){
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
 
     @Autowired
+    public void getDiscountPolicy(DiscountPolicy discountPolicy){
+        System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
+    */
+
+    // 일반 메서트 주입 - 생성자주입과 수정자 주입을 하는 단계에서 가능하기 때문에 사용 X
+    @Autowired
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

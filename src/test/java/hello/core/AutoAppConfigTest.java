@@ -1,6 +1,8 @@
 package hello.core;
 
+import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
+import hello.core.order.OrderServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -38,6 +40,9 @@ class AutoAppConfigTest {
         // + 컴포넌트 스캔과 더불어 특정 애노테이션의 부가 기능을 수행함
         // @Component, @Controller, @Service, @Repository, @Configration
 
+        OrderServiceImpl bean = ac.getBean(OrderServiceImpl.class);
+        MemberRepository memberRepository = bean.getMemberRepository();
+        System.out.println("memberRepository = " + memberRepository);
 
     }
 }
